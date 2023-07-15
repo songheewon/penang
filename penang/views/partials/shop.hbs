@@ -1,0 +1,36 @@
+<div class="swiper-slide flex justify-center center">
+    <div
+        class="w-full max-w-sm shadow-lg mx-auto my-10 relative hover:scale-95 transition-transform ease-in-out duration-700 cursor-pointer bg-white scale-90">
+        {{#if this.isOnline}}
+        <span
+            class="absolute top-0 right-0 bg-cyan-500 text-white text-xs font-medium z-10 px-2.5 py-1.5 dark:bg-blue-900 dark:text-blue-300">
+            온라인 강좌
+        </span>
+        {{/if}}
+        <img class="w-full border-2 mx-auto" src={{this.imgUrl}} alt="미리보기" />
+        <div class="px-6 py-4">
+            <div class="w-full font-bold text-xl mb-2 truncate">
+                {{this.title}}
+            </div>
+            <div class="w-full font-bold text-xl mb-2 truncate">
+                {{this.content}}
+            </div>
+        </div>
+        <div class="flex mb-1 px-6 font-bold text-gray-600">
+            <div class="text-xs w-2/5 truncate">일반회원가</div>
+            <div class="text-xs truncate">{{this.salePrice}}.replace(/\B(?=(\d{3})+(?!\d))/g, ",")</div>
+        </div>
+        <div class="flex pb-4 px-6 font-bold text-cyan-500">
+            <div class="text-xs w-2/5 truncate">유료회원할인가</div>
+            <div class="text-xs truncate">{{this.salePrice}}</div>
+        </div>
+    </div>
+</div>
+
+
+<!-- 가격을 서버에서 받으면 3자리마다 콤마를 추가해주는 function 추가 -->
+<script type="text/javascript">
+    Handlebars.registerHelper('numberToPrice', function (price) {
+        return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + " 원";
+    });
+</script>
