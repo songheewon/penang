@@ -1,3 +1,5 @@
+// 대강 이런 식으로 API가 넘어올 것이라 생각하고 더미데이터를 만들어 구현한 부분입니다.
+
 const express = require("express");
 const app = express();
 const hbs = require("hbs");

@@ -9,29 +9,31 @@
         {{/if}}
         <img class="w-full border-2 mx-auto" src={{this.imgUrl}} alt="미리보기" />
         <div class="px-6 py-4">
-            {{!-- 화면이 작아지면 글자 크기를 줄여 최대한 정보를 노출시킴 --}}
+            {{!-- 화면이 작아지면 글자 크기를 줄여 최대한 정보를 노출시켰습니다 --}}
             <div class="w-full font-bold md:text-xl text-sm mb-2 truncate dark:text-white">
                 {{this.title}}
             </div>
+            {{!-- 화면이 작아지면 글자 크기를 줄여 최대한 정보를 노출시켰습니다 --}}
             <div class="w-full font-bold md:text-xl text-sm mb-2 truncate dark:text-white">
                 {{this.content}}
             </div>
         </div>
         <div class="flex mb-1 px-6 font-bold text-gray-600 dark:text-gray-400">
-            {{!-- 화면 작아지면 가격만 보이게 --}}
+            {{!-- 화면 작아지면 가격만 보이게함으로써 중요한 정보는 작은 화면에서도 확인 가능하게 했습니다 --}}
             <div class="hidden md:flex md:text-xs md:w-2/5 md:truncate">일반회원가</div>
             <div class="text-xs truncate">{{salePrice}} 원</div>
         </div>
         <div class="flex pb-4 px-6 font-bold text-cyan-500">
-            {{!-- 화면 작아지면 가격만 보이게 --}}
+            {{!-- 화면 작아지면 가격만 보이게함으로써 중요한 정보는 작은 화면에서도 확인 가능하게 했습니다 --}}
             <div class="hidden md:flex md:text-xs md:w-2/5 md:truncate">유료회원할인가</div>
             <div class="text-xs truncate">{{this.salePrice}} 원</div>
         </div>
     </div>
 </div>
-<!-- 가격을 서버에서 받으면 3자리마다 콤마를 추가해주는 function 추가 -->
+
+<!-- 가격을 서버에서 받으면 3자리마다 콤마를 추가해주는 function 입니다 -->
 <script type="text/javascript">
     Handlebars.registerHelper('numberToPrice', function (price) {
-        return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + " 원";
+        return new Handlebars.SafeString(price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + " 원");
     });
 </script>

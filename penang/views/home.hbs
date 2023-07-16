@@ -11,15 +11,20 @@
       darkMode: 'class',
       theme: {
         extend: {
-        }
+          colors: {
+            // slogan의 색을 템플릿화 하기 위한 부분
+            // 이외에도 버튼이나 라벨 색과 같은 것을 추후 이 부분에 추가하여 코드를 수정하면 편할 것임
+            'slogan-color': '#FBBF24',
+          },
+        },
       }
     }
   </script>
   {{!-- Swiper를 사용하기 위한 import --}}
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
 
+  {{!-- localStorage에서 정보를 가져와 현재 다크모드 여부 확인 부분 --}}
   <script>
-    // localStorage에 현재 dark mode를 활성화시킨 상태인지 아닌지 정보를 저장해둠
     if (
       localStorage.getItem('color-theme') === 'dark' ||
       (!('color-theme' in localStorage) &&
@@ -44,64 +49,31 @@
     {{/each}}
   </div>
   <div class="w-1/4 mx-auto mt-3">
+    {{!-- onclick 함수는 따로 구현하지 않았습니다 (API를 호출하는 버튼이라 생각했기 때문) --}}
     <button class="w-full bg-black text-white text-sm md:text-md rounded-3xl text-center px-10 py-3">더보기</button>
   </div>
   <hr class="my-10 border-0 h-1 bg-gray-200" />
   <div class="font-bold w-3/4 mt-3 mx-auto text-2xl dark:text-white">Shop</div>
-  {{!-- 카테고리도 템플릿화해야되는지 잘 모르겠어서.. 일단 피그마대로 5개만 짰습니다. --}}
-  <div class="w-3/4 mx-auto flex mt-4">
-    <ul class="w-full md:flex">
-      <li class="me-4">
-        <input type="radio" id="all" name="selectCategory" value="all" class="hidden peer" checked>
-        <label for="all"
-          class="inline-flex items-center justify-between w-full px-4 py-2.5 text-gray-400 bg-white border-2 border-gray-200 rounded-3xl cursor-pointer dark:peer-checked:text-white dark:bg-gray-900 dark:peer-checked:border-white peer-checked:border-black peer-checked:text-black">
-          <div class="w-full text-sm text-center font-semibold truncate">전체보기</div>
-        </label>
-      </li>
-      <li class="me-4">
-        <input type="radio" id="category1" name="selectCategory" value="category1" class="hidden peer">
-        <label for="category1"
-          class="inline-flex items-center justify-between w-full px-4 py-2.5 text-gray-400 bg-white border-2 border-gray-200 rounded-3xl cursor-pointer dark:peer-checked:text-white dark:bg-gray-900 dark:peer-checked:border-white peer-checked:border-black peer-checked:text-black">
-          <div class="w-full text-sm text-center font-semibold truncate">카테고리</div>
-        </label>
-      </li>
-      <li class="me-4">
-        <input type="radio" id="category2" name="selectCategory" value="category2" class="hidden peer">
-        <label for="category2"
-          class="inline-flex items-center justify-between w-full px-4 py-2.5 text-gray-400 bg-white border-2 border-gray-200 rounded-3xl cursor-pointer dark:peer-checked:text-white dark:bg-gray-900 dark:peer-checked:border-white peer-checked:border-black peer-checked:text-black">
-          <div class="w-full text-sm text-center font-semibold truncate">카테고리</div>
-        </label>
-      </li>
-      <li class="me-4">
-        <input type="radio" id="category3" name="selectCategory" value="category3" class="hidden peer">
-        <label for="category3"
-          class="inline-flex items-center justify-between w-full px-4 py-2.5 text-gray-400 bg-white border-2 border-gray-200 rounded-3xl cursor-pointer dark:peer-checked:text-white dark:bg-gray-900 dark:peer-checked:border-white peer-checked:border-black peer-checked:text-black">
-          <div class="w-full text-sm text-center font-semibold truncate">카테고리</div>
-        </label>
-      </li>
-      <li class="me-4">
-        <input type="radio" id="category4" name="selectCategory" value="category4" class="hidden peer">
-        <label for="category4"
-          class="inline-flex items-center justify-between w-full px-4 py-2.5 text-gray-400 bg-white border-2 border-gray-200 rounded-3xl cursor-pointer dark:peer-checked:text-white dark:bg-gray-900 dark:peer-checked:border-white peer-checked:border-black peer-checked:text-black">
-          <div class="w-full text-sm text-center font-semibold truncate">카테고리</div>
-        </label>
-      </li>
-    </ul>
-  </div>
+  {{!-- 카테고리도 템플릿화해야되는지 잘 모르겠어서.. 일단 피그마대로 5개만 짰습니다 --}}
+  {{!-- 대신, 컴포넌트화하여 가독성을 높였습니다 --}}
+  {{> category}}
   <div class="relative">
     <div class="swiper shopSwiper w-3/4">
       <div class="swiper-wrapper">
-        {{!-- 서버에서 받은 shopData 정보를 토대로 화면을 구성하되, shop.hbs를 따로 빼냈음 --}}
-        {{!-- 왜냐하면 shop의 경우 메인 페이지 뿐만 아니라 board의 상세 페이지에서도 보여지기 때문에 자주 중복된다고 생각했기 때문 --}}
+        {{!-- 서버에서 받은 shopData 정보를 토대로 화면을 구성하되, shop.hbs를 따로 빼냈습니다 --}}
+        {{!-- shop의 경우 메인 페이지 뿐만 아니라 board의 상세 페이지에서도 보여지기 때문에 자주 사용된다고 생각했기 때문입니다 --}}
         {{#each shopData}}
         {{> shop}}
         {{/each}}
       </div>
     </div>
+    {{!-- swiper의 화살표 버튼은 따로 빼냈는데 위치 지정이 어려웠기 때문입니다 --}}
+    {{!-- 절대배치를 활용하되, 비율을 이용한 절대배치와 화면 크기에 따른 비율 조정을 통해 반응형을 구현하였습니다 --}}
     <div class="swiper-button-next text-gray-600 absolute bottom-1/2 right-4 md:right-12 dark:text-white"></div>
     <div class="swiper-button-prev text-gray-600 absolute bottom-1/2 left-4 md:left-12 dark:text-white"></div>
   </div>
   <div class="w-1/4 md:w-1/6 mx-auto mb-5">
+    {{!-- onclick 함수는 따로 구현하지 않았습니다 (API를 호출하는 버튼이라 생각했기 때문) --}}
     <button
       class="w-full font-bold bg-black text-white text-sm md:text-md rounded-3xl text-center px-3 md:px-10 py-3 dark:text-black dark:bg-white">Shop
       상품
@@ -110,7 +82,7 @@
   <!-- Swiper JS import -->
   <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
 
-  <!-- Swiper 환경 설정 -->
+  <!-- Swiper 환경 설정 부분입니다 -->
   <script>
     var swiper = new Swiper(".shopSwiper", {
       slidesPerView: 4,
@@ -125,11 +97,13 @@
       },
     });
   </script>
+
+  {{!-- 다크모드 구현 부분입니다 --}}
   <script>
     var themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
     var themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
 
-    // Change the icons inside the button based on previous settings
+    // 현재 다크모드 활성화 여부에 따른 if문입니다
     if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
       themeToggleLightIcon.classList.remove('hidden');
     } else {
@@ -138,13 +112,13 @@
 
     var themeToggleBtn = document.getElementById('theme-toggle');
 
+    // 다크모드 버튼의 onclick 함수입니다
     themeToggleBtn.addEventListener('click', function () {
-
-      // toggle icons inside button
+      // 해모양과 달모양 버튼의 CSS에 각각 hidden이 있으면 없애고 없으면 만듭니다
       themeToggleDarkIcon.classList.toggle('hidden');
       themeToggleLightIcon.classList.toggle('hidden');
 
-      // if set via local storage previously
+      // localStorage에 저장된 color-theme의 값을 변경해줍니다
       if (localStorage.getItem('color-theme')) {
         if (localStorage.getItem('color-theme') === 'light') {
           document.documentElement.classList.add('dark');
@@ -153,8 +127,6 @@
           document.documentElement.classList.remove('dark');
           localStorage.setItem('color-theme', 'light');
         }
-
-        // if NOT set via local storage previously
       } else {
         if (document.documentElement.classList.contains('dark')) {
           document.documentElement.classList.remove('dark');
