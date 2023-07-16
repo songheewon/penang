@@ -6,7 +6,7 @@ const hbs = require("hbs");
 const path = require("path");
 const port = 3000;
 
-app.use(express.static(path.join(__dirname, "penang/views")));
+app.use(express.static(path.join(__dirname, "views")));
 
 hbs.registerPartials(path.join(__dirname, "views/partials"));
 app.set("view engine", "hbs");
