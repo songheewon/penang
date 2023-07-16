@@ -1,6 +1,8 @@
 <div class="h-16 flex justify-between items-center px-12 sticky top-0 bg-white z-10 dark:bg-gray-900">
   {{!-- 메인페이지는 / 일 것이라 가정하고 로고를 클릭하면 메인페이지로 이동하게 했습니다 --}}
+  {{!-- 로고의 경우 화면이 작아지면 안 보이게 함으로써 메뉴바들이 깨지지 않도록 했습니다 --}}
   <a href="/"><button class="hidden md:flex dark:text-white">LOGO</button></a>
+  {{!-- 화면이 작아지면 메뉴바가 2줄로 되도록 UI를 구성했습니다 --}}
   <div class="grid-row-2 justify-center md:flex md:gap-4">
     <button class="font-semibold text-xs md:text-sm truncate dark:text-white">Home</button>
     <button class="font-semibold text-xs md:text-sm truncate dark:text-white">About</button>
