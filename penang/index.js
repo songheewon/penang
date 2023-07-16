@@ -8,9 +8,8 @@ const port = 3000;
 
 // app.use(express.static(path.join(__dirname, "penang/views")));
 app.set('views', __dirname + '/views');
-
-hbs.registerPartials(path.join(__dirname, "views/partials"));
 app.set("view engine", "hbs");
+hbs.registerPartials(path.join(__dirname, "views/partials"));
 
 
 app.get("/", (req, res) => {
@@ -156,13 +155,9 @@ app.get("/", (req, res) => {
   });
 });
 
-app.get("/about", (req, res) => {
-  res.render("about");
-});
-
 app.get("/board", (req, res) => {
   res.render("board", {
-    boardId: req.query.id,
+    // boardId: req.query.id,
     thumbnailUrl: "https://noonnu.cc/assets/noon-0e36f3deb9d903ceec1946f9253c7dea1cd629ef8e2f1fc14ec2995aa7421b69.jpg",
     title: "독일 의대생이 말하는 독일 교실의 토론 교육",
     summary: "2022 지자체 선거를 앞둔 시기, 전국 교육감 후보들 사이에 'IB 도입 공약'이 화두가 됐습니다. 2022 지자체 선거를 앞둔 시기, 전국 교육감 후보들 사이에 'IB 도입 공약'이 화두가 됐습니다. 2022 지자체 선거를 앞둔 시기, 전국 교육감 후보들 사이에 'IB 도입 공약'이 화두가 됐습니다. 2022 지자체 선거를 앞둔 시기, 전국 교육감 후보들 사이에 'IB 도입 공약'이 화두가 됐습니다. 2022 지자체 선거를 앞둔 시기, 전국 교육감 후보들 사이에 'IB 도입 공약'이 화두가 됐습니다. 2022 지자체 선거를 앞둔 시기, 전국 교육감 후보들 사이에 'IB 도입 공약'이 화두가 됐습니다. 2022 지자체 선거를 앞둔 시기, 전국 교육감 후보들 사이에 'IB 도입 공약'이 화두가 됐습니다. 2022 지자체 선거를 앞둔 시기, 전국 교육감 후보들 사이에 'IB 도입 공약'이 화두가 됐습니다.",
