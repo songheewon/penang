@@ -1,17 +1,22 @@
 <!DOCTYPE html>
-<html lang="en" class="dark">
+<html lang="en">
 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   {{!-- tailwind CSS를 사용하기 위한 import --}}
-  {{!-- <script src="https://cdn.tailwindcss.com"></script> --}}
-  <link rel="stylesheet" type="text/css" href="../global.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+        }
+      }
+    }
+  </script>
   {{!-- Swiper를 사용하기 위한 import --}}
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
-  {{!-- 다크모드 구현을 위한 flowbite import --}}
-  <script src="../path/to/flowbite/dist/flowbite.bundle.js"></script>
-  <title>홈</title>
 
   <script>
     // localStorage에 현재 dark mode를 활성화시킨 상태인지 아닌지 정보를 저장해둠
@@ -25,94 +30,60 @@
       document.documentElement.classList.remove('dark');
     }
   </script>
+  <title>홈</title>
 </head>
 
-<body>
+<body class="dark:bg-gray-900">
   {{> header}}
   {{> slogan}}
   <div class="grid grid-cols-3 gap-4 justify-between">
     {{!-- 서버에서 받은 boardData에 따라 화면을 구성 --}}
     {{#each boardData}}
     {{!-- 서버에서 받은 boardId를 통해 클릭 시 이동할 페이지를 지정 --}}
-    <a href="/board/{{ this.boardId }}" class="hover:text-black">
-      <div
-        class="w-full max-w-sm rounded-xl overflow-hidden shadow-lg mx-auto mb-10 relative hover:scale-105 transition-transform ease-in-out duration-700 cursor-pointer">
-        {{!-- 새로운 게시글인지 서버에서 정보를 받아서 New 뱃지를 붙일지 말지 결정 --}}
-        {{#if this.isNew}}
-        <span
-          class="absolute top-5 left-5 bg-cyan-500 text-white text-xs font-medium mr-2 px-2.5 py-0.5 rounded">
-          NEW
-        </span>
-        {{/if}}
-        <img class="w-full" src={{this.imgUrl}} alt="미리보기" />
-        <div class="px-6 py-4">
-          {{!-- 무료 게시글인지 구독자 전용인지 서버에서 정보를 받아서 UI를 다르게 보여줌 --}}
-          {{#if this.isFree}}
-          <div class="text-emerald-700 text-xs font-black">
-            무료 회원 공개
-          </div>
-          {{else}}
-          <div class="text-emerald-700 text-xs font-black">
-            유료 구독자 전용
-          </div>
-          {{/if}}
-          {{!-- 카테고리 및 등록 일자도 서버에서 받은 정보대로 뿌려줌 --}}
-          <div class="text-gray-400 text-xs font-semibold mb-3">
-            {{this.category}}&nbsp;&nbsp;|&nbsp;&nbsp;{{this.createdDate}}
-          </div>
-          {{!-- 제목도 --}}
-          <div class="w-full font-bold text-xl mb-2 text-ellipsis line-clamp-2">
-            {{this.title}}
-          </div>
-          {{!-- 내용도 --}}
-          <div class="text-gray-700 text-sm mb-3 text-ellipsis line-clamp-3">
-            {{this.content}}
-          </div>
-        </div>
-      </div>
-    </a>
+    {{> boardList}}
     {{/each}}
   </div>
+  <div class="w-1/4 mx-auto mt-3">
+    <button class="w-full bg-black text-white text-sm md:text-md rounded-3xl text-center px-10 py-3">더보기</button>
+  </div>
   <hr class="my-10 border-0 h-1 bg-gray-200" />
-  <div class="font-bold w-3/4 mt-3 mx-auto text-2xl">Shop</div>
-  {{!-- 카테고리도 템플릿화해야되는지 잘 모르겠어서.. 일단 피그마대로 짰습니다. --}}
+  <div class="font-bold w-3/4 mt-3 mx-auto text-2xl dark:text-white">Shop</div>
+  {{!-- 카테고리도 템플릿화해야되는지 잘 모르겠어서.. 일단 피그마대로 5개만 짰습니다. --}}
   <div class="w-3/4 mx-auto flex mt-4">
-    <ul class="w-full flex">
+    <ul class="w-full md:flex">
       <li class="me-4">
         <input type="radio" id="all" name="selectCategory" value="all" class="hidden peer" checked>
         <label for="all"
-          class="inline-flex items-center justify-between w-full px-4 py-2.5 text-gray-400 bg-white border-2 border-gray-200 rounded-3xl cursor-pointer peer-checked:border-black peer-checked:text-black">
-          <div class="w-full text-sm font-semibold truncate">전체보기</div>
+          class="inline-flex items-center justify-between w-full px-4 py-2.5 text-gray-400 bg-white border-2 border-gray-200 rounded-3xl cursor-pointer dark:peer-checked:text-white dark:bg-gray-900 dark:peer-checked:border-white peer-checked:border-black peer-checked:text-black">
+          <div class="w-full text-sm text-center font-semibold truncate">전체보기</div>
         </label>
       </li>
       <li class="me-4">
         <input type="radio" id="category1" name="selectCategory" value="category1" class="hidden peer">
         <label for="category1"
-          class="inline-flex items-center justify-between w-full px-4 py-2.5 text-gray-400 bg-white border-2 border-gray-200 rounded-3xl cursor-pointer peer-checked:border-black peer-checked:text-black">
-          <div class="w-full text-sm font-semibold truncate">카테고리</div>
+          class="inline-flex items-center justify-between w-full px-4 py-2.5 text-gray-400 bg-white border-2 border-gray-200 rounded-3xl cursor-pointer dark:peer-checked:text-white dark:bg-gray-900 dark:peer-checked:border-white peer-checked:border-black peer-checked:text-black">
+          <div class="w-full text-sm text-center font-semibold truncate">카테고리</div>
         </label>
       </li>
       <li class="me-4">
         <input type="radio" id="category2" name="selectCategory" value="category2" class="hidden peer">
         <label for="category2"
-          class="inline-flex items-center justify-between w-full px-4 py-2.5 text-gray-400 bg-white border-2 border-gray-200 rounded-3xl cursor-pointer peer-checked:border-black peer-checked:text-black">
-          <div class="w-full text-sm font-semibold truncate">카테고리</div>
+          class="inline-flex items-center justify-between w-full px-4 py-2.5 text-gray-400 bg-white border-2 border-gray-200 rounded-3xl cursor-pointer dark:peer-checked:text-white dark:bg-gray-900 dark:peer-checked:border-white peer-checked:border-black peer-checked:text-black">
+          <div class="w-full text-sm text-center font-semibold truncate">카테고리</div>
         </label>
       </li>
       <li class="me-4">
         <input type="radio" id="category3" name="selectCategory" value="category3" class="hidden peer">
         <label for="category3"
-          class="inline-flex items-center justify-between w-full px-4 py-2.5 text-gray-400 bg-white border-2 border-gray-200 rounded-3xl cursor-pointer peer-checked:border-black peer-checked:text-black">
-          <div class="w-full text-sm font-semibold truncate">카테고리</div>
+          class="inline-flex items-center justify-between w-full px-4 py-2.5 text-gray-400 bg-white border-2 border-gray-200 rounded-3xl cursor-pointer dark:peer-checked:text-white dark:bg-gray-900 dark:peer-checked:border-white peer-checked:border-black peer-checked:text-black">
+          <div class="w-full text-sm text-center font-semibold truncate">카테고리</div>
         </label>
       </li>
       <li class="me-4">
         <input type="radio" id="category4" name="selectCategory" value="category4" class="hidden peer">
         <label for="category4"
-          class="inline-flex items-center justify-between w-full px-4 py-2.5 text-gray-400 bg-white border-2 border-gray-200 rounded-3xl cursor-pointer peer-checked:border-black peer-checked:text-black">
-
-          <div class="w-full text-sm font-semibold truncate">카테고리</div>
-
+          class="inline-flex items-center justify-between w-full px-4 py-2.5 text-gray-400 bg-white border-2 border-gray-200 rounded-3xl cursor-pointer dark:peer-checked:text-white dark:bg-gray-900 dark:peer-checked:border-white peer-checked:border-black peer-checked:text-black">
+          <div class="w-full text-sm text-center font-semibold truncate">카테고리</div>
         </label>
       </li>
     </ul>
@@ -127,8 +98,14 @@
         {{/each}}
       </div>
     </div>
-    <div class="swiper-button-next text-gray-600 absolute bottom-1/2 right-12"></div>
-    <div class="swiper-button-prev text-gray-600 absolute bottom-1/2 left-12"></div>
+    <div class="swiper-button-next text-gray-600 absolute bottom-1/2 right-4 md:right-12 dark:text-white"></div>
+    <div class="swiper-button-prev text-gray-600 absolute bottom-1/2 left-4 md:left-12 dark:text-white"></div>
+  </div>
+  <div class="w-1/4 md:w-1/6 mx-auto mb-5">
+    <button
+      class="w-full font-bold bg-black text-white text-sm md:text-md rounded-3xl text-center px-3 md:px-10 py-3 dark:text-black dark:bg-white">Shop
+      상품
+      더보기</button>
   </div>
   <!-- Swiper JS import -->
   <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
@@ -148,7 +125,6 @@
       },
     });
   </script>
-
   <script>
     var themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
     var themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
@@ -188,11 +164,8 @@
           localStorage.setItem('color-theme', 'dark');
         }
       }
-
     });
   </script>
-
-
 </body>
 
 </html>

@@ -8,8 +8,16 @@ app.use(express.static(__dirname + "/views"));
 hbs.registerPartials(__dirname + "/views/partials");
 app.set("view engine", "hbs");
 
+
 app.get("", (req, res) => {
   res.render("home", {
+    sloganTitle: "AnotherThinkingLab 어나더씽킹랩",
+    sloganDesc: [
+      "Thoughts + Education,",
+      "토론을 기반으로 한 새로운",
+      "교육 실험",
+    ],
+    sloganFooter: "아이와 부모가 함께 성장하는 행복한 교육을 지향합니다",
     boardData: [
       {
         boardId: "1",
@@ -148,12 +156,90 @@ app.get("/about", (req, res) => {
   res.render("about");
 });
 
-app.get("/board/:id", (req, res) => {
-  res.render("board");
-});
+app.get("/board", (req, res) => {
+  res.render("board", {
+    boardId: req.query.id,
+    thumbnailUrl: "https://noonnu.cc/assets/noon-0e36f3deb9d903ceec1946f9253c7dea1cd629ef8e2f1fc14ec2995aa7421b69.jpg",
+    title: "독일 의대생이 말하는 독일 교실의 토론 교육",
+    summary: "2022 지자체 선거를 앞둔 시기, 전국 교육감 후보들 사이에 'IB 도입 공약'이 화두가 됐습니다. 2022 지자체 선거를 앞둔 시기, 전국 교육감 후보들 사이에 'IB 도입 공약'이 화두가 됐습니다. 2022 지자체 선거를 앞둔 시기, 전국 교육감 후보들 사이에 'IB 도입 공약'이 화두가 됐습니다. 2022 지자체 선거를 앞둔 시기, 전국 교육감 후보들 사이에 'IB 도입 공약'이 화두가 됐습니다. 2022 지자체 선거를 앞둔 시기, 전국 교육감 후보들 사이에 'IB 도입 공약'이 화두가 됐습니다. 2022 지자체 선거를 앞둔 시기, 전국 교육감 후보들 사이에 'IB 도입 공약'이 화두가 됐습니다. 2022 지자체 선거를 앞둔 시기, 전국 교육감 후보들 사이에 'IB 도입 공약'이 화두가 됐습니다. 2022 지자체 선거를 앞둔 시기, 전국 교육감 후보들 사이에 'IB 도입 공약'이 화두가 됐습니다.",
+    author: "anothertinking",
+    createdDate: "2022-07-28",
+    content: "독일은 토론의 나라라 해도 과언이 아닙니다. 독일은 토론의 나라라 해도 과언이 아닙니다. 독일은 토론의 나라라 해도 과언이 아닙니다. 독일은 토론의 나라라 해도 과언이 아닙니다. 독일은 토론의 나라라 해도 과언이 아닙니다. 독일은 토론의 나라라 해도 과언이 아닙니다. 독일은 토론의 나라라 해도 과언이 아닙니다. 독일은 토론의 나라라 해도 과언이 아닙니다. 독일은 토론의 나라라 해도 과언이 아닙니다. 독일은 토론의 나라라 해도 과언이 아닙니다. 독일은 토론의 나라라 해도 과언이 아닙니다. 독일은 토론의 나라라 해도 과언이 아닙니다. 독일은 토론의 나라라 해도 과언이 아닙니다. 독일은 토론의 나라라 해도 과언이 아닙니다. 독일은 토론의 나라라 해도 과언이 아닙니다. 독일은 토론의 나라라 해도 과언이 아닙니다. 독일은 토론의 나라라 해도 과언이 아닙니다. 독일은 토론의 나라라 해도 과언이 아닙니다. 독일은 토론의 나라라 해도 과언이 아닙니다. 독일은 토론의 나라라 해도 과언이 아닙니다. 독일은 토론의 나라라 해도 과언이 아닙니다. 독일은 토론의 나라라 해도 과언이 아닙니다. 독일은 토론의 나라라 해도 과언이 아닙니다. 독일은 토론의 나라라 해도 과언이 아닙니다. 독일은 토론의 나라라 해도 과언이 아닙니다.",
+    imgUrl: "https://noonnu.cc/assets/noon-0e36f3deb9d903ceec1946f9253c7dea1cd629ef8e2f1fc14ec2995aa7421b69.jpg",
+    shopData: [
+      {
+        itemId: "1",
+        isOnline: true,
+        imgUrl:
+          "https://noonnu.cc/assets/noon-0e36f3deb9d903ceec1946f9253c7dea1cd629ef8e2f1fc14ec2995aa7421b69.jpg",
+        title: "타이틀",
+        content: "컨텐츠",
+        basicPrice: "3000",
+        salePrice: "1000",
+      },
+      {
+        itemId: "2",
+        isOnline: true,
+        imgUrl:
+          "https://noonnu.cc/assets/noon-0e36f3deb9d903ceec1946f9253c7dea1cd629ef8e2f1fc14ec2995aa7421b69.jpg",
+        title: "타이틀",
+        content: "컨텐츠",
+        basicPrice: "10000",
+        salePrice: "3000",
+      },
+      {
+        itemId: "3",
+        isOnline: true,
+        imgUrl:
+          "https://noonnu.cc/assets/noon-0e36f3deb9d903ceec1946f9253c7dea1cd629ef8e2f1fc14ec2995aa7421b69.jpg",
+        title: "타이틀",
+        content: "컨텐츠",
+        basicPrice: "6000",
+        salePrice: "5000",
+      },
+      {
+        itemId: "4",
+        isOnline: true,
+        imgUrl:
+          "https://noonnu.cc/assets/noon-0e36f3deb9d903ceec1946f9253c7dea1cd629ef8e2f1fc14ec2995aa7421b69.jpg",
+        title: "타이틀",
+        content: "컨텐츠",
+        basicPrice: "2000",
+        salePrice: "500",
+      },
+      {
+        itemId: "5",
+        isOnline: true,
+        imgUrl:
+          "https://noonnu.cc/assets/noon-0e36f3deb9d903ceec1946f9253c7dea1cd629ef8e2f1fc14ec2995aa7421b69.jpg",
+        title: "타이틀",
+        content: "컨텐츠",
+        basicPrice: "100",
+        salePrice: "50",
+      },
+      {
+        itemId: "6",
+        isOnline: true,
+        imgUrl:
+          "https://noonnu.cc/assets/noon-0e36f3deb9d903ceec1946f9253c7dea1cd629ef8e2f1fc14ec2995aa7421b69.jpg",
+        title: "타이틀",
+        content: "컨텐츠",
+        basicPrice: "100",
+        salePrice: "30",
+      },
+      {
+        itemId: "1",
+        isOnline: true,
+        imgUrl:
+          "https://noonnu.cc/assets/noon-0e36f3deb9d903ceec1946f9253c7dea1cd629ef8e2f1fc14ec2995aa7421b69.jpg",
+        title: "타이틀",
+        content: "컨텐츠",
+        basicPrice: "3000",
+        salePrice: "7000",
+      },
 
-app.get("/temp", (req, res) => {
-  res.render("temp");
+    ]
+  });
 });
 
 app.listen(port, () => {
