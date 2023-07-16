@@ -247,3 +247,5 @@ app.get("/board", (req, res) => {
 app.listen(port, () => {
   console.log(`서버가 실행됨 포트 넘버 :  ${port}`);
 });
+
+module.exports = app;
