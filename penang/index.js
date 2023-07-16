@@ -3,15 +3,18 @@
 const express = require("express");
 const app = express();
 const hbs = require("hbs");
+const path = require("path");
 const port = 3000;
 
-app.use(express.static(__dirname + "/views"));
+app.use(express.static(path.join(__dirname, "views")));
+// app.use(express.static(__dirname + "/views"));
 
-hbs.registerPartials(__dirname + "/views/partials");
+hbs.registerPartials(path.join(__dirname, "views/partials"));
+// hbs.registerPartials(__dirname + "/views/partials");
 app.set("view engine", "hbs");
 
 
-app.get("", (req, res) => {
+app.get("/", (req, res) => {
   res.render("home", {
     sloganTitle: "AnotherThinkingLab 어나더씽킹랩",
     sloganDesc: [
