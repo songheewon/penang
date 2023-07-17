@@ -1,4 +1,4 @@
-// 대강 이런 식으로 API가 넘어올 것이라 생각하고 더미데이터를 만들어 구현한 부분입니다.
+// 대강 이런 식으로 API가 넘어올 것이라 생각하고 더미 데이터를 만들어둔 부분입니다.
 
 const express = require("express");
 const app = express();
@@ -11,6 +11,8 @@ app.set('views', __dirname + '/views');
 app.set("view engine", "hbs");
 hbs.registerPartials(__dirname + '/views/partials');
 
+
+// home에는 slogan에 대한 데이터, 게시글에 대한 데이터, shop에 대한 데이터가 넘어갑니다.
 app.get("", (req, res) => {
   res.render("home", {
     sloganTitle: "AnotherThinkingLab 어나더씽킹랩",
@@ -154,6 +156,7 @@ app.get("", (req, res) => {
   });
 });
 
+// board에는 게시글에 대한 데이터, shop에 대한 데이터가 넘아갑니다
 app.get("/board", (req, res) => {
   res.render("board", {
     // queryString의 값을 boardId로 합니다
@@ -241,6 +244,7 @@ app.get("/board", (req, res) => {
   });
 });
 
+// 실행
 app.listen(port, () => {
   console.log(`서버가 실행됨 포트 넘버 :  ${port}`);
 });
